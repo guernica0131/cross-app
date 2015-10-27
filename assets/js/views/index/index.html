@@ -1,0 +1,190 @@
+<div class="nav-buffer"></div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <div class="col-sm-2 col-md-2">
+                <h5>Changelist/Build</h5>
+            </div>
+            <div class="col-sm-1 col-md-1 header-text">
+                <h5>Owner</h5>
+            </div>
+            <div class="col-sm-2 col-md-2 header-text">
+                <h5>Time Started</h5>
+            </div>
+            <div class="col-sm-1 col-md-1 header-text">
+                <h5>State</h5>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="col-sm-3 col-md-3 header-text">
+                    <div class="header-text">
+                        <h5>Metrics</h5>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 header-text">
+                    <div class="header-text">
+                        <h5>Build</h5>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3 header-text">
+                    <div class="header-text">
+                        <h5>Unit Test</h5>
+                    </div>
+                </div>
+                <div class="col-sm-3 col-md-3">
+                    <div class="header-text">
+                        <h5>Functional Test</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-offset-1 col-md-10">
+            <div ng-repeat="a in apps" class="app-content {{a.state}}" ng-class="{open: a.active}">
+                <div ng-click="setActive(a)" class="element-toggle">
+                    <div class="row">
+                        <div class="col-sm-2 col-md-2">
+                            <i class="fa fa-2x icon" ng-class="{'fa-th': a.type == 'firewall', 'fa-desktop': a.type == 'build'}"></i>
+                            <p class="metric first"> &nbsp; {{a.typeID}} </p>
+                        </div>
+                        <div class="col-sm-1 col-md-1">
+                            <p class="metric"> {{a.owner}}</p>
+                        </div>
+                        <div class="col-sm-2 col-md-2">
+                            <p class="metric" ng-bind="a.timeStarted  | amDateFormat:'MM/DD/YYYY, h:mm a'"> </p>
+                        </div>
+                        <div class="col-sm-1 col-md-1">
+                            <p class="metric"> {{a.state}}</p>
+                        </div>
+                        <div class="col-sm-6 col-md-6" ng-hide="a.active">
+                            <div class="col-sm-3 col-md-3">
+                                <div class="metric-status">
+                                    <div class="metric-state {{a.stages.metrics}}"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <div class="metric-status">
+                                    <div class="metric-state {{a.stages.build}}"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <div class="metric-status">
+                                    <div class="metric-state {{a.stages.unit}}"></div>
+                                </div>
+                            </div>
+                            <div class="col-sm-3 col-md-3">
+                                <div class="metric-status">
+                                    <div class="metric-state {{a.stages.functional}}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" ng-show="a.active">
+                    <div class="col-md-9">
+                        <ul class="list-inline metric-list">
+                            <li>
+                                <div ng-click="showDetails(0, a)" class="metric-content {{a.stages.metrics}}" ng-bind-html="setTemplate(a, 'metrics')"></div>
+                            </li>
+                            <li>
+                                <div ng-click="showDetails(1, a)" class="metric-content {{a.stages.build}}" ng-bind-html="setTemplate(a, 'build')"></div>
+                            </li>
+                            <li>
+                                <div ng-click="showDetails(2, a)" class="metric-content {{a.stages.unit}}">
+                                    <div class="content-item {{ a.stages.unit }}">
+                                        <h4>Unit</h4>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xs-7 col-sm-7 col-md-7">
+                                                    <canvas class="chart chart-pie chart-pie-sm" chart-colours="charColors" chart-data="[a.unit.test.conducted - a.unit.test.passed, a.unit.test.passed ]" chart-labels="['Fail', 'Pass']"></canvas>
+                                                </div>
+                                                <div class="col-xs-5 col-sm-5 col-md-5">
+                                                    <div class="tests-passed-wrapper text-center">
+                                                        <div class="tests-passed {{setPassing(a.unit.test)}}">{{a.unit.test.passed / a.unit.test.conducted * 100 | number:0}}%</div>
+                                                        <p>Tests Passed</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                                    <bar coverage="a.unit.coverage"></bar>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div ng-click="showDetails(3, a)" class="metric-content {{a.stages.functional}}">
+                                    <div class="content-item {{ a.stages.functional }}">
+                                        <h4>Functional Tests</h4>
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-xs-7 col-sm-7 col-md-7">
+                                                    <canvas class="chart chart-pie chart-pie-sm" chart-colours="charColors" chart-data="[a.functional.test.conducted - a.functional.test.passed, a.functional.test.passed ]" chart-labels="['Fail', 'Pass']"></canvas>
+                                                </div>
+                                                <div class="col-xs-5 col-sm-5 col-md-5">
+                                                    <div class="tests-passed-wrapper text-center">
+                                                        <div class="tests-passed {{setPassing(a.functional.test)}}">{{a.functional.test.passed / a.functional.test.conducted * 100 | number:0}}%</div>
+                                                        <p>Tests Passed</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                                    <bar coverage="a.functional.coverage"></bar>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-md-3 text-center">
+                        <div class="result-content">
+                            <h3>Result:</h3>
+                            <p class="{{a.state}}">Change {{a.state}}</p>
+                            <h1 class="result-text {{a.state}}">{{a.logs[0]}}</h1>
+                            <div ng-if="a.state == 'Complete'">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <input class="form-control btn btn-info" value="Deploy" ng-click="deploy(a)" />
+                                    </div>
+                                    <div class="col-md-2 to">
+                                        to:
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-offset-1 col-md-8">
+                                        <select class="form-control" ng-init="a.deploy = 'Production'" ng-model="a.deploy">
+                                            <option selected>Production</option>
+                                            <option>QA</option>
+                                            <option>Development</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div ng-if="a.state == 'Rejected'">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <input class="form-control btn btn-info" value="Find Issues" ng-click="findIssues(a)" />
+                                </div>
+                            </div>
+                            <div ng-if="a.state == 'Accepted'">
+                                <div class="col-md-8 col-md-offset-2">
+                                    <button class="form-control btn btn-info" ng-hide="a.mergeSearch" ng-click="a.mergeSearch = true"><i class='fa fa-search'></i> Merge Builds</button>
+                                    <select class="form-control" ng-show="a.mergeSearch" ng-change="a.openSelect = true" ng-model="a.mergedBuild" ng-options="b.id for b in a.build">
+                                    	<option value=""> -- Select Build -- </option>
+                                    </select>
+                                    <br/>
+                                    <button class="form-control btn btn-info" ng-show="a.openSelect" ng-click="a.mergeSearch = false; a.openSelect = false; merge(a)">Merge</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

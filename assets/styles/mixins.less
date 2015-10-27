@@ -1,0 +1,39 @@
+.gradient(@color) {
+    background: -moz-linear-gradient(left, rgba(red(@color), green(@color), blue(@color), 0.10) 0%, rgba(red(@color), green(@color), blue(@color), 0.05) 50%, rgba(red(@color), green(@color), blue(@color), 0) 80%);
+    // /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(red(@color), green(@color), blue(@color), 0.10)), color-stop(50%, rgba(red(@color), green(@color), blue(@color), 0.05)), color-stop(100%, rgba(red(@color), green(@color), blue(@color), 0))); //Chrome,Safari4+ 
+    background: -webkit-linear-gradient(left, rgba(red(@color), green(@color), blue(@color), 0.10) 0%, rgba(red(@color), green(@color), blue(@color), 0.05) 50%, rgba(red(@color), green(@color), blue(@color), 0) 80%);
+    // /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(left, rgba(red(@color), green(@color), blue(@color), 0.10) 0%, rgba(red(@color), green(@color), blue(@color), 0.05) 50%, rgba(red(@color), green(@color), blue(@color), 0) 80%);
+    // /* Opera 11.10+ */
+    background: -ms-linear-gradient(left, rgba(red(@color), green(@color), blue(@color), 0.10) 0%, rgba(red(@color), green(@color), blue(@color), 0.05) 50%, rgba(red(@color), green(@color), blue(@color), 0) 80%);
+    /* IE10+ */
+    background: linear-gradient(to right, rgba(red(@color), green(@color), blue(@color), 0.10) 0%, rgba(red(@color), green(@color), blue(@color), 0.05) 50%, rgba(red(@color), green(@color), blue(@color), 0) 80%);
+    /* W3C */
+}
+
+.transition(@transition) {
+    -webkit-transition: @transition;
+    -moz-transition: @transition;
+    -ms-transition: @transition;
+    -o-transition: @transition;
+}
+
+.box-shadow (@string) {
+    -webkit-box-shadow: @string;
+    -moz-box-shadow: @string;
+    box-shadow: @string;
+}
+
+.vertical-align() {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.border-radius(@radius) {
+    .border-top-radius(@radius);
+    .border-right-radius(@radius);
+    .border-bottom-radius(@radius);
+    .border-left-radius(@radius);
+}

@@ -1,0 +1,30 @@
+{
+  "name": "crossover",
+  "version": "0.0.0",
+  "authors": [
+    "Adam <guernica0131@gmail.com>"
+  ],
+  "description": "Application for Crossover interview: Sr. Frontent Web Designer",
+  "main": "app.js",
+  "keywords": [
+    "interview",
+    "crossover"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.4.7",
+    "angular-sails": "~1.1.4",
+    "angular-ui-router": "~0.2.15",
+    "lodash": "~3.10.1",
+    "angular-moment": "~0.10.3",
+    "Chart.js": "~1.0.2",
+    "angular-chart.js": "~0.8.5"
+  }
+}

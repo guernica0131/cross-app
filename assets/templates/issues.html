@@ -1,0 +1,17 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-12">
+		<h1>
+			Issues found for <%= id %>
+		</h1>
+		<p>
+			After a detailed analysis, we detected the following issues:
+		</p>
+		<ul>
+			<% issues.forEach(function(issue) { %>
+			<li><%=issue%></li>
+			<% }); %>
+		</ul>
+
+	</div>
+</div>

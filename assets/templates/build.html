@@ -1,0 +1,22 @@
+<div class="content-item <%= stages.build %>">
+    <h4>Build</h4>
+    <div class="container-fluid">
+        <div class="row text-center">
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <i class="fa fa-desktop fa-5x computer"></i>
+                <p class="computer-text">Debug</p>
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6">
+                <i class="fa fa-desktop fa-5x computer"></i>
+                <p class="computer-text">Release</p>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+            
+                <p class="build-time"><%= moment(build[0].time).format('h:mma - MM/DD/YYYY')  %></p>
+            </div>
+            
+        </div>
+    </div>
+</div>

@@ -1,0 +1,50 @@
+<%
+// logic to define passing
+function getArrow(data) {
+
+	if (data > 50) {
+		return 'fa-arrow-up';
+	} 
+
+	return 'fa-arrow-down';
+
+}
+
+%>
+    <div class="content-item <%= stages.metrics %>">
+        <h4>Metrics</h4>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="arrow-wrapper">
+                        <i class="fa <%=getArrow(metrics.test)%> fa-5x"></i>
+                        <div class="value"><%=metrics.test%></div>
+                    </div>
+                    <p>Test</p>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="arrow-wrapper">
+                        <i class="fa <%=getArrow(metrics.maintain)%> fa-5x"></i>
+                        <div class="value"><%=metrics.maintain%></div>
+                    </div>
+                    <p>Maintainablity</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="arrow-wrapper">
+                        <i class="fa fa-arrow-right fa-5x"></i>
+                        <div class="value"><%=metrics.security%></div>
+                    </div>
+                    <p>Security</p>
+                </div>
+                <div class="col-xs-6 col-sm-6 col-md-6">
+                    <div class="arrow-wrapper">
+                        <i class="fa fa-arrow-right fa-5x"></i>
+                        <div class="value"><%=metrics.workmanship%></div>
+                    </div>
+                    <p>Workmanship</p>
+                </div>
+            </div>
+        </div>
+    </div>

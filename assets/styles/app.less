@@ -1,0 +1,272 @@
+.nav-buffer {
+    height: @navbar-height;
+}
+
+.heading-content {
+    text-align: center;
+}
+
+.header-text {
+    overflow-x: visible;
+    white-space: nowrap;
+    h5 {
+        white-space: nowrap;
+    }
+}
+
+#popover {
+    overflow: hidden;
+    z-index: 100;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: @popover-background;
+    .popover-content-wrapper {
+        margin-top: 400px;
+        width: 80%;
+        height: 80%;
+        margin: auto auto;
+        background-color: white;
+        .vertical-align();
+        .close-button {
+            position: absolute;
+            right: 5px;
+            cursor: pointer;
+        }
+        .popover-content {
+            overflow-y: scroll;
+        }
+    }
+}
+
+.app-content {
+    @toggled-open: 300px;
+    overflow: hidden;
+    height: 40px;
+    width: 100%;
+    border: solid 2px @gray-light;
+    margin-bottom: 5px;
+    .gradient(@gray-light);
+    color: @gray-light;
+    .transition(all 300ms ease);
+    .element-toggle {
+        cursor: pointer;
+        height: 40px;
+        width: 100%;
+    }
+    &.open {
+        overflow-y: scroll;
+        height: @toggled-open;
+    }
+    &.Complete {
+        border-color: @brand-success;
+        .gradient(@brand-success);
+        color: @brand-success;
+    }
+    &.Rejected {
+        border-color: @brand-danger;
+        .gradient(@brand-danger);
+        color: @brand-danger;
+    }
+    &.Running {
+        border-color: @brand-info;
+        .gradient(@brand-info);
+        color: @brand-info;
+    }
+    &.Accepted {
+        border-color: @brand-success;
+        .gradient(@brand-success);
+        color: @brand-success;
+    }
+    .icon {
+        top: 6px;
+        left: 20px;
+        position: absolute;
+    }
+    .result-content {
+    	select {
+    		margin-top: 10px;
+    	}
+
+        h3 {
+            color: gray;
+        }
+
+        .to {
+        	padding-top: 3px;
+        	color: @gray-light;
+        }
+
+        p,h1 {
+        	&.Accepted {
+        		color: @brand-warning;
+        	}
+        	&.Complete {
+        		color: @brand-success;	
+        	}
+        	&.Rejected {
+        		color: @brand-danger;	
+        	}
+        	&.Failed {
+        		color: @brand-danger;	
+        	}
+        	&.Pending {
+        		color: @gray-light;
+        	}
+        }
+    }
+    .metric {
+        //line-height: 0;
+        padding-top: 6px;
+        padding-left: 5px;
+        &.first {
+            margin-left: 30px;
+        }
+    }
+    .metric-status {
+        margin-top: 3px;
+        width: 48px;
+        height: 30px;
+        background-color: @gray-lighter;
+        border: solid 2px darken(@gray-lighter, 8%);
+        .metric-state {
+            position: relative;
+            top: 2px;
+            left: 2px;
+            width: 40px;
+            height: 22px;
+            &.pass {
+                background: @brand-success;
+            }
+            &.fail {
+                background: @brand-danger;
+            }
+            &.running {
+                background: @brand-info;
+                width: 20px;
+            }
+        }
+    }
+    .metric-list {
+        margin-left: 25px;
+        li {
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    .metric-content {
+        @box-size: @toggled-open - 80px;
+        .box-shadow(5px 5px 5px 0 @gray-light);
+        margin: 5px;
+        margin-top: 15px;
+        cursor: pointer;
+        width: @box-size;
+        height: @box-size;
+        background: white;
+        border: 2px solid @gray-light;
+        padding: 3px;
+        &.pass {
+            border-color: @brand-success;
+        }
+        &.fail {
+            border-color: @brand-danger;
+        }
+        .content-item {
+            text-align: center;
+            color: @gray;
+            h4 {
+                text-align: left;
+                line-height: 0px;
+            }
+            &.pass {
+                color: @brand-success;
+            }
+            &.fail {
+                color: @brand-danger;
+            }
+            .fa-arrow-up {
+                color: @brand-success;
+            }
+            .fa-arrow-down {
+                color: @brand-danger;
+            }
+            .fa-arrow-right {
+                color: @brand-warning;
+            }
+            p {
+                color: @gray;
+            }
+            .chart-pie-sm {
+                width: 200px;
+                height: 200px;
+            }
+            .computer {
+                padding-top: 30px;
+                color: @brand-info;
+            }
+            .computer-text {
+                color: @brand-info;
+                font-weight: bold;
+            }
+            .build-time {
+                margin-top: 20px;
+                color: @gray;
+            }
+            .tests-passed-wrapper {
+                .tests-passed {
+                    color: @brand-danger;
+                    font-size: 220%;
+                    font-weight: bold;
+                    &.warning {
+                        color: @brand-warning;
+                    }
+                    &.ok {
+                        color: @brand-success;
+                    }
+                }
+            }
+            .bar-chart-wrapper {
+                margin-top: 20px;
+                text-align: center;
+                position: relative;
+                width: 180px;
+                height: 50px;
+                background: rgba(red(@brand-warning), green(@brand-warning), blue(@brand-warning), 0.3);
+                .bar-chart {
+                    height: 100%;
+                    background-color: @brand-success;
+                }
+                .bar-text {
+                    //font-weight: bold;
+                    line-height: 15px;
+                    top: 0px;
+                    position: absolute;
+                    width: 100%;
+                    height: 100%;
+                    color: @gray;
+                    h3 {
+                        line-height: 0;
+                    }
+                }
+            }
+            .arrow-wrapper {
+                //background: red;
+                //text-align: center;
+                position: relative;
+                .value {
+                    top: 27px;
+                    left: 28px;
+                    //smargin: auto auto;
+                    //.vertical-align();
+                    position: absolute;
+                    background: white;
+                    color: @gray;
+                    width: 20px;
+                    height: 20px;
+                    .border-radius(50%);
+                }
+            }
+        }
+    }
+}
