@@ -222,8 +222,8 @@ module.exports.bootstrap = function(cb) {
 
 
 
-            var seedCount = process.env.seedCount || 10;
-            //console.log(sails.models['application']);
+            var seedCount = process.env.SEED_COUNT || 10; //change to update the seed count
+
             Application.find({}).exec(function(err, found) {
                 if (!(found || []).length) {
                     seed();
